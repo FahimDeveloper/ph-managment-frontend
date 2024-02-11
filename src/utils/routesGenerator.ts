@@ -1,12 +1,13 @@
+import { ReactNode } from "react";
 import { TPath } from "../types/path.type";
 
 type TRoute = {
-  path: string | undefined;
-  element: JSX.Element;
+  path: string;
+  element: ReactNode;
 };
 
 export const routesGenerator = (routePaths: TPath[]) => {
-  routePaths.reduce((acc: TRoute[], route: TPath) => {
+  const routes = routePaths.reduce((acc: TRoute[], route) => {
     if (route.path && route.element) {
       acc.push({
         path: route.path,
@@ -14,13 +15,14 @@ export const routesGenerator = (routePaths: TPath[]) => {
       });
     }
     if (route.children) {
-      route.children.forEach((child: TPath) => {
+      route.children.forEach((child) => {
         acc.push({
-          path: child.path,
+          path: child.path!,
           element: child.element,
         });
       });
     }
     return acc;
   }, []);
+  return routes;
 };

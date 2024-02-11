@@ -1,9 +1,9 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Button, Layout, Menu, theme } from "antd";
+import { Button, Layout, theme } from "antd";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { adminSidebarMenu } from "../../routes/admin.routes";
-const { Content, Header, Sider } = Layout;
+import Sidebar from "./Sidebar";
+const { Content, Header } = Layout;
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -14,12 +14,7 @@ const MainLayout = () => {
 
   return (
     <Layout className="h-screen">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="text-white text-center text-xl font-semibold my-2">
-          PH Uni
-        </div>
-        <Menu theme="dark" mode="inline" items={adminSidebarMenu} />
-      </Sider>
+      <Sidebar collapsed={collapsed} />
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Button
